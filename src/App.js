@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
+import Alarm from './components/Alarm';
 import Clock from './components/Clock';
 import Timer from './components/Timer'
 import Session from './components/Session';
+import Control from './components/Control';
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Session type="session"/>
           <Session type="break"/>
         </div>
+        <Alarm />
+        <Control />
         <Clock />
       </div>
     </div>
