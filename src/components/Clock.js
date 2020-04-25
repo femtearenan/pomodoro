@@ -1,5 +1,4 @@
 import React from 'react';
-import face from '../face.svg';
 
 class Clock extends React.Component {
     render() {
