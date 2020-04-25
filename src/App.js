@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Clock from './components/Clock';
+import Timer from './components/Timer'
+import Session from './components/Session';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="overlay">
+        <div id="overlay-top"></div>
+        <div id="overlay-bottom"></div>
+      </div>
+      <div id="content">
+        <Timer />
+        <div id="session-container">
+          <Session type="session"/>
+          <Session type="break"/>
+        </div>
+        <Clock />
+      </div>
     </div>
   );
 }

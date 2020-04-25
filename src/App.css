@@ -1,38 +1,122 @@
 .App {
-  text-align: center;
+  background-image: linear-gradient(to right, #5a9fff, #7eb2ff, #9ec5ff, #bed8ff, #ddebff);
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#overlay {
+  z-index: 0;
+  position: absolute;
+  top: 0rem;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#overlay-top {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#content {
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#clock {
+  width: 25rem;
+  height: 25rem;
+  background-image: url("face.svg");
+  background-repeat: no-repeat;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#hand-container {
+  position: relative;
+  top: -5rem;
+  display: flex;
+}
+
+.hand {
+  width: 1rem;
+  height: 10rem;
+  background-color: #ffc55a;
+  position: relative;
+  z-index: 2;
+  left: 0.5rem;
+}
+
+#hand-shadow {
+  background-color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  left: -0.5rem;
+  box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+#display {
+  position: absolute;
+  top: 0rem;
+  z-index: 20;
+  font-size: 5rem;
+  color: #482F00;
+  display: flex;
+}
+
+p {
+  margin: 0;
+}
+#session-container {
+  z-index: 20;
+  position: relative;
+  left: 24rem;
+}
+
+#timer-label {
+  margin-left: 1rem;
+  color: #8C5AFF;
+}
+
+.session {
+  margin: 3rem;
+  width: 10rem;
+  color: #482F00;
+  z-index: 20;
+  display: flex;
+  justify-self: center;
+}
+
+.session > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#session-label {
+  /* justify-self: flex-end; */
+
+}
+
+.length-indicator {
+  font-size: 2.5rem;
+}
+
+.arrow {
+  height: 2rem;
+}
+
+.incrementers {
+  margin-left: auto;
+}
+
+.incrementers > img {
+  margin: 0.25rem;
 }
