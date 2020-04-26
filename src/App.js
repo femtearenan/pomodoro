@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import Alarm from './components/Alarm';
 import Clock from './components/Clock';
@@ -28,4 +29,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+});
+
+export default connect(mapStateToProps)(App);
