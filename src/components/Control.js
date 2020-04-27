@@ -27,12 +27,17 @@ class Control extends React.Component {
     }
 
     ticker(initialize = false) {
-        if (this.props.countdownOn || initialize) {
-            this.props.tick();
+        if ((this.props.countdownOn && !this.props.pauseOn) || initialize) {
+            if (initialize) {
+                setTimeout(this.props.tick, 250);
+            } else {
+                this.props.tick();
+            }
             setTimeout(this.ticker, 1000);
         } else if (this.props.timeLeft.minutes === 0 && this.props.timeLeft.seconds === 0) {
             this.props.alarm();
-            setTimeout(this.turn, 1000);
+            // setTimeout(this.turn, 1000);
+            this.turn();
         }
     }
 
@@ -49,22 +54,22 @@ class Control extends React.Component {
         if (!this.props.countdownOn) {
             return (
                 <div id="control">
-                    <div id="reset">
-                        <img id="stop" src={stopImg} alt="reset timer" onClick={this.reset}/>
+                    <div id="reset" onClick={this.reset}>
+                        <img id="stop" src={stopImg} alt="reset timer" />
                     </div>
-                    <div id="start_stop">
-                        <img id="play" src={playImg} alt="start timer" onClick={this.start}/>
+                    <div id="start_stop" onClick={this.start}>
+                        <img id="play" src={playImg} alt="start timer" />
                     </div>
                 </div>
             );
         } else {
             return (
                 <div id="control">
-                    <div id="reset">
-                        <img id="stop" src={stopImg} alt="reset timer" onClick={this.reset}/>
+                    <div id="reset" onClick={this.reset}>
+                        <img id="stop" src={stopImg} alt="reset timer" />
                     </div>
-                    <div id="start_stop">
-                        <img id="pause" src={pauseImg} alt="pause timer" onClick={this.pause}/>
+                    <div id="start_stop" onClick={this.pause}>
+                        <img id="pause" src={pauseImg} alt="pause timer" />
                     </div>
                 </div>
             );
@@ -83,6 +88,6 @@ const mapDispatchToProps = dispatch => ({
     reset: () => dispatch(reset()),
     start: () => dispatch(start()),
     tick: () => dispatch(tick()),
-    turn: () => dispatch(turn())
+    turn: () => dispatch(turn()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Control);

@@ -13,11 +13,7 @@ class Session extends React.Component {
     }
 
     timeToString(timeObject) {
-        let timeString = timeObject.minutes + ":";
-        if (timeObject.seconds < 10) {
-            timeString += "0";
-        }
-        timeString += timeObject.seconds;
+        let timeString = timeObject.minutes;
         return timeString;
     }
 
@@ -30,11 +26,15 @@ class Session extends React.Component {
     }
 
     increaseOnClick() {
-        this.props.increase(this.props.type);
+        if (this.getTimeByType() < 60) {
+            this.props.increase(this.props.type);
+        }
     }
 
     decreaseOnClick() {
-        this.props.decrease(this.props.type);
+        if (this.getTimeByType() > 0) {
+            this.props.decrease(this.props.type);
+        }
     }
 
     render() {

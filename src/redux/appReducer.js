@@ -1,4 +1,4 @@
-import { INCREASE, DECREASE, RESET, START, TICK, PAUSE, TURN, ALARM, MUTE_TOGGLE} from './actions';
+import { INCREASE, DECREASE, RESET, START, TICK, PAUSE, TURN, ALARM, MUTE_TOGGLE, INIT_RESET} from './actions';
 
 const initialState = {
     timeLeft: {
@@ -17,6 +17,8 @@ const initialState = {
     countdownOn: false,
     alarmOn: false,
     mute: false,
+    pauseOn: false,
+    resetOn: false
 }
 
 function appReducer(state = initialState, action) {
@@ -79,15 +81,18 @@ function appReducer(state = initialState, action) {
                 });
             }
         case RESET:
-            console.log(initialState);
-            return {...initialState};
+            return Object.assign({}, initialState, {
+                resetOn: true
+            });
         case START: 
             return Object.assign({}, state, {
-                countdownOn: true
+                countdownOn: true,
+                pauseOn: false
             });
         case PAUSE:
             return Object.assign({}, state, {
-                countdownOn: false
+                countdownOn: false,
+                pauseOn: true
             });
         case  TICK:
             let countdownOn = state.countdownOn;
@@ -130,7 +135,11 @@ function appReducer(state = initialState, action) {
             console.log("Toggle mute");
             return Object.assign({}, state, {
                 mute: !state.mute
-            })
+            });
+        case INIT_RESET:
+            return Object.assign({}, state, {
+                resetOn: !state.resetOn
+            });
         default:
             return state;
     }
