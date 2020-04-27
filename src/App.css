@@ -162,3 +162,42 @@ p {
 .muted {
   opacity: 0.5;
 }
+
+@media (max-width: 1040px) {
+  #session-container {
+    left: initial;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 830px) {
+  #clock {
+    opacity: 0.6
+  }
+
+  #session-container {
+    margin-left: 0;
+  }
+
+  #display {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 510px) {
+  html {
+    font-size: 14px;
+  }
+
+  #display {
+    font-size: 3rem;
+  }
+
+  #control img, #alarm img{
+    height: 4rem;
+  }
+
+  #control {
+    right: 2rem;
+  }
+}
