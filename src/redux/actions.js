@@ -5,6 +5,8 @@ export const PAUSE = 'PAUSE';
 export const RESET = 'RESET';
 export const TICK = 'TICK';
 export const TURN = 'TURN';
+export const ALARM = 'ALARM';
+export const MUTE_TOGGLE = 'MUTE_TOGGLE';
 
 export const increase = (value) => {
     return {
@@ -51,5 +53,17 @@ export const tick = () => {
 export const turn = () => {
     return {
         type: TURN
+    }
+}
+
+export const alarm = () => {
+    return {
+        type: ALARM
+    }
+}
+
+export const toggleMute = () => {
+    return {
+        type: MUTE_TOGGLE
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { pause, reset, start, tick, turn } from '../redux/actions';
+import { alarm, pause, reset, start, tick, turn } from '../redux/actions';
 
 
 import playImg from '../play.svg';
@@ -31,6 +31,7 @@ class Control extends React.Component {
             this.props.tick();
             setTimeout(this.ticker, 1000);
         } else if (this.props.timeLeft.minutes === 0 && this.props.timeLeft.seconds === 0) {
+            this.props.alarm();
             setTimeout(this.turn, 1000);
         }
     }
@@ -77,10 +78,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    alarm: () => dispatch(alarm()),
     pause: () => dispatch(pause()),
     reset: () => dispatch(reset()),
     start: () => dispatch(start()),
     tick: () => dispatch(tick()),
     turn: () => dispatch(turn())
-})
+});
 export default connect(mapStateToProps, mapDispatchToProps)(Control);

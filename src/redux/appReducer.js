@@ -1,4 +1,4 @@
-import { INCREASE, DECREASE, RESET, START, TICK, PAUSE, TURN} from './actions';
+import { INCREASE, DECREASE, RESET, START, TICK, PAUSE, TURN, ALARM, MUTE_TOGGLE} from './actions';
 
 const initialState = {
     timeLeft: {
@@ -15,7 +15,8 @@ const initialState = {
     },
     status: "IN SESSION",
     countdownOn: false,
-    alarmOn: false
+    alarmOn: false,
+    mute: false,
 }
 
 function appReducer(state = initialState, action) {
@@ -54,13 +55,13 @@ function appReducer(state = initialState, action) {
         case DECREASE:
             if ((action.payload.value === "session" && state.status === "IN SESSION") || 
                 (action.payload.value === "break" && state.status === "ON BREAK")) {
-                if (timeLeft.minutes > 0) {
+                if (timeLeft.minutes > 1 || (timeLeft.minutes > 0 && timeLeft.seconds > 0)) {
                     timeLeft.minutes -= 1;
                 }
             }
             if (action.payload.value === "session") {
                 timeObject = {...state.sessionTime};
-                if (timeObject.minutes > 0) {
+                if (timeObject.minutes > 1 || (timeObject.minutes > 0 && timeObject.seconds > 0)) {
                     timeObject.minutes -= 1;
                 }
                 return Object.assign({}, state, {
@@ -69,7 +70,7 @@ function appReducer(state = initialState, action) {
                 });
             } else {
                 timeObject = {...state.breakTime};
-                if (timeObject.minutes > 0) {
+                if (timeObject.minutes > 1 || (timeObject.minutes > 0 && timeObject.seconds > 0)) {
                     timeObject.minutes -= 1;
                 }
                 return Object.assign({}, state, {
@@ -121,6 +122,15 @@ function appReducer(state = initialState, action) {
                 timeLeft: {...timeObject},
                 status: status
             });
+        case ALARM:
+            return Object.assign({}, state, {
+                alarmOn: !state.alarmOn
+            });
+        case MUTE_TOGGLE:
+            console.log("Toggle mute");
+            return Object.assign({}, state, {
+                mute: !state.mute
+            })
         default:
             return state;
     }
