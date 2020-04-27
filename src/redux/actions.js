@@ -4,6 +4,7 @@ export const START = 'START';
 export const PAUSE = 'PAUSE';
 export const RESET = 'RESET';
 export const TICK = 'TICK';
+export const TURN = 'TURN';
 
 export const increase = (value) => {
     return {
@@ -47,10 +48,8 @@ export const tick = () => {
     }
 }
 
-export const ticker = () => {
-    return function(dispatch) {
-        
-
-        
+export const turn = () => {
+    return {
+        type: TURN
     }
 }

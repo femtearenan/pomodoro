@@ -150,7 +150,11 @@ p {
   padding-top: 4px;
 }
 
+#reset {
+  margin-left: 1rem;
+}
 
 #start_stop {
-  margin-left: 2rem;
+  margin-left: auto;
+  margin-right: 1rem;
 }

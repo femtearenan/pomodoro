@@ -1,4 +1,4 @@
-import { INCREASE, DECREASE, RESET, START, TICK, PAUSE} from './actions';
+import { INCREASE, DECREASE, RESET, START, TICK, PAUSE, TURN} from './actions';
 
 const initialState = {
     timeLeft: {
@@ -14,13 +14,14 @@ const initialState = {
         seconds: 0
     },
     status: "IN SESSION",
-    countdownOn: false
+    countdownOn: false,
+    alarmOn: false
 }
 
 function appReducer(state = initialState, action) {
-    console.log(action);
     let timeObject = null;
     let timeLeft = {...state.timeLeft};
+    let status = "";
 
     switch(action.type) {
         case INCREASE:
@@ -58,7 +59,7 @@ function appReducer(state = initialState, action) {
                 }
             }
             if (action.payload.value === "session") {
-                timeObject = state.sessionTime;
+                timeObject = {...state.sessionTime};
                 if (timeObject.minutes > 0) {
                     timeObject.minutes -= 1;
                 }
@@ -67,7 +68,7 @@ function appReducer(state = initialState, action) {
                     sessionTime: timeObject
                 });
             } else {
-                timeObject = state.breakTime;
+                timeObject = {...state.breakTime};
                 if (timeObject.minutes > 0) {
                     timeObject.minutes -= 1;
                 }
@@ -77,9 +78,8 @@ function appReducer(state = initialState, action) {
                 });
             }
         case RESET:
-            return Object.assign({}, state, {
-                ...initialState
-            });
+            console.log(initialState);
+            return {...initialState};
         case START: 
             return Object.assign({}, state, {
                 countdownOn: true
@@ -107,6 +107,19 @@ function appReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 countdownOn: countdownOn,
                 timeLeft: {...timeLeft}
+            });
+        case TURN:
+            if (state.status === "IN SESSION") {
+                timeObject = {...state.breakTime};
+                status = "ON BREAK";
+            } else {
+                timeObject = {...state.sessionTime};
+                status = "IN SESSION";
+            }
+            return Object.assign({}, state, {
+                countdownOn: true,
+                timeLeft: {...timeObject},
+                status: status
             });
         default:
             return state;

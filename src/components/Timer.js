@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 class Timer extends React.Component {
 
     timeToString() {
-        let timeString = this.props.timeLeft.minutes + ":";
+        let timeString = "";
+        if (this.props.timeLeft.minutes < 10) {
+            timeString = "0";
+        }
+        timeString += this.props.timeLeft.minutes + ":";
         if (this.props.timeLeft.seconds < 10) {
             timeString += "0";
         }
